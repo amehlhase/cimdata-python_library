@@ -7,6 +7,7 @@ from tkinter import messagebox
 
 
 # TODO: readme übersetzen
+# TEST
 
 # GRID Basic Configuration:
 root = tk.Tk()
