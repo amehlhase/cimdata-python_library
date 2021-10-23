@@ -6,9 +6,6 @@ from tkinter.constants import ANCHOR
 from tkinter import messagebox
 
 
-# TODO: readme übersetzen
-# TEST
-
 # GRID Basic Configuration:
 root = tk.Tk()
 root.title("ISBN-basierte Bibliothek")
@@ -23,11 +20,11 @@ root.grid_columnconfigure(1, weight=1)
 root.grid_columnconfigure(2, weight=1)
 
 # VARIABLEN & KONSTANTEN:
-backgroundcolor = '#d3f5dc'
-highlightcolor = '#7E9384'
-font_gross = font.Font(family="Calibri", size=18, weight="bold")
-font_mittel = font.Font(family="Calibri", size=14)
-font_klein = font.Font(family="Calibri", size=11)
+BACKGROUNDCOLOR = '#d3f5dc'
+HIGHLIGHTCOLOR = '#7E9384'
+FONT_GROSS = font.Font(family="Calibri", size=18, weight="bold")
+FONT_MITTEL = font.Font(family="Calibri", size=14)
+FONT_KLEIN = font.Font(family="Calibri", size=11)
 
 BASE_API_LINK = "https://www.googleapis.com/books/v1/volumes?q=isbn:"
 
@@ -95,8 +92,8 @@ def load_book_listbox(event):
     if not is_infowindow_true:
         info_window = tk.Toplevel(root)
         info_window.title("Buchinformationen")
-        info_window.configure(background=backgroundcolor,
-                              highlightbackground=backgroundcolor)
+        info_window.configure(background=BACKGROUNDCOLOR,
+                              highlightbackground=BACKGROUNDCOLOR)
 
         current_entry = bib_listbox.get(ANCHOR).split(", ")
         current_entry_isbn = current_entry[2].lstrip("ISBN: ")
@@ -126,38 +123,38 @@ def load_book_listbox(event):
         info_window.grid_columnconfigure(1, weight=1)
 
         tk.Label(info_window,
-                 text="Autor*in:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=0, column=0, padx=5, pady=5, sticky="w")
+                 text="Autor*in:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=0, column=0, padx=5, pady=5, sticky="w")
         tk.Label(info_window,
-                 text=f"{authors}", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=0, column=1, sticky="w")
+                 text=f"{authors}", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=0, column=1, sticky="w")
 
         tk.Label(info_window,
-                 text="Titel:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=1, column=0, padx=5, pady=5, sticky="w")
+                 text="Titel:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=1, column=0, padx=5, pady=5, sticky="w")
         tk.Label(info_window,
-                 text=f"„{book_title}“", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=1, column=1, padx=5, pady=5, sticky="w")
+                 text=f"„{book_title}“", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=1, column=1, padx=5, pady=5, sticky="w")
 
         tk.Label(info_window,
-                 text="Seitenanzahl:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=2, column=0, padx=5, pady=5, sticky="w")
-        tk.Label(info_window, text=f"{book_pages}", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(
+                 text="Seitenanzahl:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=2, column=0, padx=5, pady=5, sticky="w")
+        tk.Label(info_window, text=f"{book_pages}", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(
             row=2, column=1, padx=5, pady=5, sticky="w")
 
         tk.Label(info_window,
-                 text="Veröffentlichung:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=3, column=0, sticky="w")
-        tk.Label(info_window, text=f"{book_year}", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(
+                 text="Veröffentlichung:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=3, column=0, sticky="w")
+        tk.Label(info_window, text=f"{book_year}", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(
             row=3, column=1, padx=5, pady=5, sticky="w")
 
         tk.Label(info_window,
-                 text="Sprache:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=4, column=0, padx=5, pady=5, sticky="w")
-        tk.Label(info_window, text=f"{book_language}", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(
+                 text="Sprache:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=4, column=0, padx=5, pady=5, sticky="w")
+        tk.Label(info_window, text=f"{book_language}", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(
             row=4, column=1, padx=5, pady=5, sticky="w")
 
         tk.Label(info_window,
-                 text="ISBN:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=5, column=0, padx=5, pady=5, sticky="w")
-        tk.Label(info_window, text=f"{book_isbn}", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(
+                 text="ISBN:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=5, column=0, padx=5, pady=5, sticky="w")
+        tk.Label(info_window, text=f"{book_isbn}", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(
             row=5, column=1, padx=5, pady=5, sticky="w")
 
         tk.Label(info_window,
-                 text="Status:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=6, column=0, padx=5, pady=5, sticky="w")
-        tk.Label(info_window, text=f"{current_entry_status}", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(
+                 text="Status:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=6, column=0, padx=5, pady=5, sticky="w")
+        tk.Label(info_window, text=f"{current_entry_status}", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(
             row=6, column=1, padx=5, pady=5, sticky="w")
         is_infowindow_true = True
     else:
@@ -180,7 +177,7 @@ def get_book_data():
 
         if json_obj["totalItems"] == 0:
             tk.Label(result_window, text="Zu der eingegebenen ISBN wurde leider kein Eintrag gefunden.\nBitte probiere es nochmal und gib eine gültige 13- oder 10-stellige ISBN ein",
-                     font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=1, column=0, padx=15, pady=15)
+                     font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=1, column=0, padx=15, pady=15)
         else:
             book_info = json_obj["items"][0]
             authors = ", ".join(json_obj["items"][0]["volumeInfo"]["authors"])
@@ -195,85 +192,85 @@ def get_book_data():
             book_year = book_info["volumeInfo"]["publishedDate"]
 
             tk.Label(result_window,
-                     text="Autor*in:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=1, column=0, padx=5, pady=5, sticky="w")
+                     text="Autor*in:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=1, column=0, padx=5, pady=5, sticky="w")
             tk.Label(result_window,
-                     text=f"{authors}", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=1, column=1, padx=5, pady=5, sticky="w")
+                     text=f"{authors}", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=1, column=1, padx=5, pady=5, sticky="w")
 
             tk.Label(result_window,
-                     text="Titel:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=2, column=0, padx=5, pady=5, sticky="w")
+                     text="Titel:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=2, column=0, padx=5, pady=5, sticky="w")
             tk.Label(result_window,
-                     text=f"„{book_title}“", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=2, column=1, padx=5, pady=5, sticky="w")
+                     text=f"„{book_title}“", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=2, column=1, padx=5, pady=5, sticky="w")
 
             tk.Label(result_window,
-                     text="Seitenanzahl:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=3, column=0, padx=5, pady=5, sticky="w")
-            tk.Label(result_window, text=f"{book_pages}", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(
+                     text="Seitenanzahl:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=3, column=0, padx=5, pady=5, sticky="w")
+            tk.Label(result_window, text=f"{book_pages}", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(
                 row=3, column=1, padx=5, pady=5, sticky="w")
 
             tk.Label(result_window,
-                     text="Veröffentlichung:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=4, column=0, padx=5, pady=5, sticky="w")
-            tk.Label(result_window, text=f"{book_year}", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(
+                     text="Veröffentlichung:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=4, column=0, padx=5, pady=5, sticky="w")
+            tk.Label(result_window, text=f"{book_year}", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(
                 row=4, column=1, padx=5, pady=5, sticky="w")
 
             tk.Label(result_window,
-                     text="Sprache:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=5, column=0, padx=5, pady=5, sticky="w")
-            tk.Label(result_window, text=f"{book_language}", font=font_klein, background=backgroundcolor,
-                     highlightbackground=backgroundcolor).grid(row=5, column=1, padx=5, pady=5, sticky="w")
+                     text="Sprache:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=5, column=0, padx=5, pady=5, sticky="w")
+            tk.Label(result_window, text=f"{book_language}", font=FONT_KLEIN, background=BACKGROUNDCOLOR,
+                     highlightbackground=BACKGROUNDCOLOR).grid(row=5, column=1, padx=5, pady=5, sticky="w")
 
             tk.Label(result_window,
-                     text="ISBN:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=6, column=0, padx=5, pady=5, sticky="w")
-            tk.Label(result_window, text=f"{book_isbn}", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(
+                     text="ISBN:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=6, column=0, padx=5, pady=5, sticky="w")
+            tk.Label(result_window, text=f"{book_isbn}", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(
                 row=6, column=1, padx=5, pady=5, sticky="w")
 
             tk.Label(result_window,
-                     text="Autor*in:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=1, column=0, padx=5, pady=5, sticky="w")
+                     text="Autor*in:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=1, column=0, padx=5, pady=5, sticky="w")
             tk.Label(result_window,
-                     text=f"{authors}", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=1, column=1, padx=5, pady=5, sticky="w")
+                     text=f"{authors}", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=1, column=1, padx=5, pady=5, sticky="w")
 
             tk.Label(result_window,
-                     text="Titel:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=2, column=0, padx=5, pady=5, sticky="w")
+                     text="Titel:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=2, column=0, padx=5, pady=5, sticky="w")
             tk.Label(result_window,
-                     text=f"„{book_title}“", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=2, column=1, padx=5, pady=5, sticky="w")
+                     text=f"„{book_title}“", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=2, column=1, padx=5, pady=5, sticky="w")
 
             tk.Label(result_window,
-                     text="Seitenanzahl:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=3, column=0, padx=5, pady=5, sticky="w")
-            tk.Label(result_window, text=f"{book_pages}", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(
+                     text="Seitenanzahl:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=3, column=0, padx=5, pady=5, sticky="w")
+            tk.Label(result_window, text=f"{book_pages}", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(
                 row=3, column=1, padx=5, pady=5, sticky="w")
 
             tk.Label(result_window,
-                     text="Veröffentlichung:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=4, column=0, padx=5, pady=5, sticky="w")
-            tk.Label(result_window, text=f"{book_year}", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(
+                     text="Veröffentlichung:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=4, column=0, padx=5, pady=5, sticky="w")
+            tk.Label(result_window, text=f"{book_year}", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(
                 row=4, column=1, padx=5, pady=5, sticky="w")
 
             tk.Label(result_window,
-                     text="Sprache:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=5, column=0, padx=5, pady=5, sticky="w")
-            tk.Label(result_window, text=f"{book_language}", font=font_klein, background=backgroundcolor,
-                     highlightbackground=backgroundcolor).grid(row=5, column=1, padx=5, pady=5, sticky="w")
+                     text="Sprache:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=5, column=0, padx=5, pady=5, sticky="w")
+            tk.Label(result_window, text=f"{book_language}", font=FONT_KLEIN, background=BACKGROUNDCOLOR,
+                     highlightbackground=BACKGROUNDCOLOR).grid(row=5, column=1, padx=5, pady=5, sticky="w")
 
             tk.Label(result_window,
-                     text="ISBN:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=6, column=0, padx=5, pady=5, sticky="w")
-            tk.Label(result_window, text=f"{book_isbn}", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(
+                     text="ISBN:", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=6, column=0, padx=5, pady=5, sticky="w")
+            tk.Label(result_window, text=f"{book_isbn}", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(
                 row=6, column=1, padx=5, pady=5, sticky="w")
 
             tk.Button(result_window, text="Auf die Wunschliste",
-                      font=font_klein, command=add_to_wishlist, background=highlightcolor,
-                      highlightbackground=highlightcolor).grid(row=7, column=0, pady=10, padx=10)
+                      font=FONT_KLEIN, command=add_to_wishlist, background=HIGHLIGHTCOLOR,
+                      highlightbackground=HIGHLIGHTCOLOR).grid(row=7, column=0, pady=10, padx=10)
             tk.Button(result_window, text="Gerade lesend",
-                      font=font_klein, command=add_to_currently_reading, background=highlightcolor,
-                      highlightbackground=highlightcolor).grid(row=7, column=1, pady=10, padx=10)
+                      font=FONT_KLEIN, command=add_to_currently_reading, background=HIGHLIGHTCOLOR,
+                      highlightbackground=HIGHLIGHTCOLOR).grid(row=7, column=1, pady=10, padx=10)
             tk.Button(result_window, text="Bereits gelesen",
-                      font=font_klein, command=add_to_read, background=highlightcolor,
-                      highlightbackground=highlightcolor).grid(row=7, column=2, pady=10, padx=10)
+                      font=FONT_KLEIN, command=add_to_read, background=HIGHLIGHTCOLOR,
+                      highlightbackground=HIGHLIGHTCOLOR).grid(row=7, column=2, pady=10, padx=10)
     else:
         tk.Label(
-            result_window, text="Keine Suchergebnisse! Bitte gib eine gültige 13- oder 10-stellige ISBN ein.", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=1, column=0, padx=15, pady=15)
+            result_window, text="Keine Suchergebnisse! Bitte gib eine gültige 13- oder 10-stellige ISBN ein.", font=FONT_KLEIN, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR).grid(row=1, column=0, padx=15, pady=15)
 
 
 def open_result_window():
     global result_window
     result_window = tk.Toplevel(root)
     result_window.title("Suchergebnis")
-    result_window.configure(background=backgroundcolor,
-                            highlightbackground=backgroundcolor)
+    result_window.configure(background=BACKGROUNDCOLOR,
+                            highlightbackground=BACKGROUNDCOLOR)
 
     result_window.grid_rowconfigure(0, weight=1)
     result_window.grid_rowconfigure(1, weight=1)
@@ -294,30 +291,30 @@ def callback(event):
 
 
 # WIDGETS:
-entry_label = tk.Label(root, text="ISBN:", font=font_mittel,
-                       background=backgroundcolor, highlightbackground=backgroundcolor)
+entry_label = tk.Label(root, text="ISBN:", font=FONT_MITTEL,
+                       background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR)
 
-entry = tk.Entry(root, width=30, font=font_mittel)
+entry = tk.Entry(root, width=30, font=FONT_MITTEL)
 entry.bind('<Return>', callback)
 
 search_button = tk.Button(
-    root, text="Suchen", font=font_mittel, command=get_book_data, background=highlightcolor,
-    highlightbackground=highlightcolor)
+    root, text="Suchen", font=FONT_MITTEL, command=get_book_data, background=HIGHLIGHTCOLOR,
+    highlightbackground=HIGHLIGHTCOLOR)
 
 hl_bib = tk.Label(root, text="Meine gespeicherten Bücher:",
-                  font=font_gross, background=backgroundcolor, highlightbackground=backgroundcolor)
+                  font=FONT_GROSS, background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR)
 
-bib_listbox = tk.Listbox(root, font=font_klein, width=70, height=20)
+bib_listbox = tk.Listbox(root, font=FONT_KLEIN, width=70, height=20)
 bib_listbox.bind("<<ListboxSelect>>", load_book_listbox)
 
 delete_button = tk.Button(root, text="Eintrag löschen",
-                          font=font_mittel, command=delete_book, background=highlightcolor,
-                          highlightbackground=highlightcolor)
+                          font=FONT_MITTEL, command=delete_book, background=HIGHLIGHTCOLOR,
+                          highlightbackground=HIGHLIGHTCOLOR)
 
 load_listbox()
 
 # PACKING:
-root.configure(background=backgroundcolor, highlightbackground=backgroundcolor)
+root.configure(background=BACKGROUNDCOLOR, highlightbackground=BACKGROUNDCOLOR)
 
 entry_label.grid(row=0, column=0, padx=10, sticky="e")
 entry.grid(row=0, column=1, padx=10, pady=10, sticky="e")
