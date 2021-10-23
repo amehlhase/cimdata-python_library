@@ -5,6 +5,9 @@ import json
 from tkinter.constants import ANCHOR
 from tkinter import messagebox
 
+
+# TODO: readme übersetzen
+
 # GRID Basic Configuration:
 root = tk.Tk()
 root.title("ISBN-basierte Bibliothek")
@@ -19,8 +22,8 @@ root.grid_columnconfigure(1, weight=1)
 root.grid_columnconfigure(2, weight=1)
 
 # VARIABLEN & KONSTANTEN:
-backgroundcolor = '#d3f5dc'  # Basic Hintergrundfarbe
-highlightcolor = '#7E9384'  # Highlight-Farbe für Buttons
+backgroundcolor = '#d3f5dc'
+highlightcolor = '#7E9384'
 font_gross = font.Font(family="Calibri", size=18, weight="bold")
 font_mittel = font.Font(family="Calibri", size=14)
 font_klein = font.Font(family="Calibri", size=11)
@@ -34,68 +37,59 @@ is_infowindow_true = False
 
 
 def add_to_wishlist():
-    # Funktion für den Button "Zur Wunschliste hinzufügen", Titel wird in TXT geschrieben
     with open("txt/bib.txt", "a+") as bib:
         bib.write(f"{book_title}, " + f"{authors}, " +
                   f"ISBN: {book_isbn}, " + "Auf der Wunschliste\n")
     messagebox.showinfo(
         "Info", "Zur Wunschliste hinzugefügt!\nDas Fenster wird jetzt geschlossen.")
-    result_window.destroy()  # Schließen des Extra-Fensters nach Hinzufügen
-    load_listbox()  # erneutes Laden der Liste, damit aktuell hinzugefügtes Buch auch erscheint
+    result_window.destroy()
+    load_listbox()
 
 
 def add_to_currently_reading():
-    # Funktion für den Button "Gerade lesend", Titel wird in TXT geschrieben
     with open("txt/bib.txt", "a+") as bib:
         bib.write(f"{book_title}, " + f"{authors}, " +
                   f"ISBN: {book_isbn}, " + "Gerade lesend\n")
     messagebox.showinfo(
         "Info", "Der Titel wurde der Liste als Buch, das du aktuell liest, hinzugefügt!\nDas Fenster wird jetzt geschlossen.")
-    result_window.destroy()  # Schließen des Extra-Fensters nach Hinzufügen
-    load_listbox()  # erneutes Laden der Liste, damit aktuell hinzugefügtes Buch auch erscheint
+    result_window.destroy()
+    load_listbox()
 
 
 def add_to_read():
-    # Funktion für den Button "Bereits gelesen", Titel wird in TXT geschrieben
     with open("txt/bib.txt", "a+") as bib:
         bib.write(f"{book_title}, " + f"{authors}, " +
                   f"ISBN: {book_isbn}, " + "Bereits gelesen\n")
     messagebox.showinfo(
         "Info", "Der Titel wurde der Liste als Buch, das du bereits gelesen hast, hinzugefügt!\nDas Fenster wird jetzt geschlossen.")
-    result_window.destroy()  # Schließen des Extra-Fensters nach Hinzufügen
-    load_listbox()  # erneutes Laden der Liste, damit aktuell hinzugefügtes Buch auch erscheint
+    result_window.destroy()
+    load_listbox()
 
 
 def delete_book():
-    # Funktion zum Löschen eines ausgewählten Titels (der aktuell angeklickte, also blau markierte ist durch ANCHOR ausgewählt)
     delete_messagebox = messagebox.askyesno(
         "Frage", f"Soll der ausgewählte Eintrag wirklich gelöscht werden?")
-    if delete_messagebox:  # nur wenn Ja geklickt wird, wird Eintrag gelöscht
+    if delete_messagebox:
         bib_listbox.delete(ANCHOR)
 
-    # Auslesen und Überschreiben der TXT-Datei
     with open("txt/bib.txt", "r+") as bib:
-        bib.truncate(0)  # TXT sicherheitshalber leeren
+        bib.truncate(0)
         for i in range(bib_listbox.size() - 1):
             bib.write(bib_listbox.get(i) + ", ")
         bib.write(bib_listbox.get(bib_listbox.size()-1))
 
-    load_listbox()  # erneutes Laden der Liste, damit aktuell hinzugefügtes Buch auch erscheint
+    load_listbox()
 
 
 def load_listbox():
-    # Funktion zum Laden der TXT in Listbox
-    # Listbox leeren, um doppelte Einträge zu vermeiden
     bib_listbox.delete(0, tk.END)
     with open("txt/bib.txt", "r") as bib:
-        liste = bib.readlines()  # Auslesen jeder einzelnen Zeile
+        liste = bib.readlines()
         for item in liste:
-            # Hinzufügen jeder Zeile zur Listbox
             bib_listbox.insert(tk.END, item)
 
 
 def load_book_listbox(event):
-    # Funktion für neues Fenster, in dem Buchinformationen über das aktuell ausgewählte Element in der Listbox angezeigt werden
     global is_infowindow_true, info_window
     if not is_infowindow_true:
         info_window = tk.Toplevel(root)
@@ -107,7 +101,6 @@ def load_book_listbox(event):
         current_entry_isbn = current_entry[2].lstrip("ISBN: ")
         current_entry_status = current_entry[-1].rstrip("\n")
 
-        # Auslesen der JSON-Datei
         with urllib.request.urlopen(BASE_API_LINK + current_entry_isbn) as f:
             text = f.read()
         json_obj = json.loads(text.decode("utf-8"))
@@ -120,7 +113,6 @@ def load_book_listbox(event):
         book_language = (book_info["volumeInfo"]["language"]).upper()
         book_year = book_info["volumeInfo"]["publishedDate"]
 
-        # GRID Config für separates Fenster
         info_window.grid_rowconfigure(0, weight=1)
         info_window.grid_rowconfigure(1, weight=1)
         info_window.grid_rowconfigure(2, weight=1)
@@ -132,7 +124,6 @@ def load_book_listbox(event):
         info_window.grid_columnconfigure(0, weight=1)
         info_window.grid_columnconfigure(1, weight=1)
 
-        # Labels mit allen ausgelesenen Informationen:
         tk.Label(info_window,
                  text="Autor*in:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=0, column=0, padx=5, pady=5, sticky="w")
         tk.Label(info_window,
@@ -169,33 +160,27 @@ def load_book_listbox(event):
             row=6, column=1, padx=5, pady=5, sticky="w")
         is_infowindow_true = True
     else:
-        # Schließen des alten Fensters, falls bereits eines geöffnet ist
         info_window.destroy()
         is_infowindow_true = False
         load_book_listbox(event)
 
 
 def get_book_data():
-    # Funktion um Buch-Daten für die eingegebene ISBN abzufragen
-    # Formatierung des User-Inputs, um überflüssige Bindestriche und Leerzeichen zu entfernen
     user_input = entry.get().replace("-", "").strip()
 
-    # Auslesen der JSON-Datei mit fest definiertem API-Link (siehe oben bei Variablen) und individuellem User-Input
     with urllib.request.urlopen(BASE_API_LINK + user_input) as f:
         text = f.read()
 
-    open_result_window()  # Öffnen eines neuen Fensters für Suchergebnis
+    open_result_window()
 
     if len(user_input) == 10 or len(user_input) == 13:
         global json_obj, book_info, authors, book_title, book_isbn, book_pages, book_language, book_year
         json_obj = json.loads(text.decode("utf-8"))
 
         if json_obj["totalItems"] == 0:
-            # falls "echte" ISBN eingegeben wurde, aber kein Ergebnis gefunden werden konnte (Titel z.B. nicht bei Google Books verfügbar oder es handelt sich um ein nicht supportetes Format wie nischige E-Books o.ä.)
             tk.Label(result_window, text="Zu der eingegebenen ISBN wurde leider kein Eintrag gefunden.\nBitte probiere es nochmal und gib eine gültige 13- oder 10-stellige ISBN ein",
                      font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=1, column=0, padx=15, pady=15)
         else:
-            # falls ISBN gefunden, werden Variablen angelegt, die die benötigten Informationen aus der JSON-Datei bündeln
             book_info = json_obj["items"][0]
             authors = ", ".join(json_obj["items"][0]["volumeInfo"]["authors"])
 
@@ -208,7 +193,6 @@ def get_book_data():
             book_language = (book_info["volumeInfo"]["language"]).upper()
             book_year = book_info["volumeInfo"]["publishedDate"]
 
-            # Erstellung und Packing der Label mit den gewünschten Informationen im neuen Fenster
             tk.Label(result_window,
                      text="Autor*in:", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=1, column=0, padx=5, pady=5, sticky="w")
             tk.Label(result_window,
@@ -279,13 +263,11 @@ def get_book_data():
                       font=font_klein, command=add_to_read, background=highlightcolor,
                       highlightbackground=highlightcolor).grid(row=7, column=2, pady=10, padx=10)
     else:
-        # Bei ungültiger ISBN-Eingabe, d.h. weder 10- noch 13-stellig
         tk.Label(
             result_window, text="Keine Suchergebnisse! Bitte gib eine gültige 13- oder 10-stellige ISBN ein.", font=font_klein, background=backgroundcolor, highlightbackground=backgroundcolor).grid(row=1, column=0, padx=15, pady=15)
 
 
 def open_result_window():
-    # separate Funktion, um ein eigenes Fenster mit dem Buch-Suchergebnis zu öffnen
     global result_window
     result_window = tk.Toplevel(root)
     result_window.title("Suchergebnis")
@@ -306,57 +288,44 @@ def open_result_window():
     result_window.grid_columnconfigure(2, weight=1)
 
 
-# Callback-Funktion, um aus der Entrybar heraus mit Enter die get_book_data Funktion aufzurufen; Funktionalität mit bind() weiter unten gesichert
 def callback(event):
     get_book_data()
 
 
 # WIDGETS:
-# Widget: Label zur Erklärung für Entrybar
 entry_label = tk.Label(root, text="ISBN:", font=font_mittel,
                        background=backgroundcolor, highlightbackground=backgroundcolor)
 
-# Widget: Entry-Bar mit Callback-Funktion, um Enter-Taste drücken zu können statt Such-Button klicken zu müssen
 entry = tk.Entry(root, width=30, font=font_mittel)
 entry.bind('<Return>', callback)
 
-# Widget: Suchbutton mit eigener Hintergrundfarbe
 search_button = tk.Button(
     root, text="Suchen", font=font_mittel, command=get_book_data, background=highlightcolor,
     highlightbackground=highlightcolor)
 
-# Widget: Headline für Listbox
 hl_bib = tk.Label(root, text="Meine gespeicherten Bücher:",
                   font=font_gross, background=backgroundcolor, highlightbackground=backgroundcolor)
 
-# Widget: Listbox, in der die Bücherliste dargestellt wird; mit bind() Aufruf der Buchinformationen via Klick auf das Element in der Listbox möglich
 bib_listbox = tk.Listbox(root, font=font_klein, width=70, height=20)
 bib_listbox.bind("<<ListboxSelect>>", load_book_listbox)
 
-# Widget: Lösch-Button
 delete_button = tk.Button(root, text="Eintrag löschen",
                           font=font_mittel, command=delete_book, background=highlightcolor,
                           highlightbackground=highlightcolor)
 
-
-# Aufruf: Laden der Bücherliste
 load_listbox()
 
 # PACKING:
-# Festlegen der Hintergrundfarbe (Mac und Windows):
 root.configure(background=backgroundcolor, highlightbackground=backgroundcolor)
 
-# Packing von ISBN-Label, Entrybar und Such-Button:
 entry_label.grid(row=0, column=0, padx=10, sticky="e")
 entry.grid(row=0, column=1, padx=10, pady=10, sticky="e")
 search_button.grid(row=0, column=2, padx=10, sticky="w")
 
-# Packing von Headline für Listbox sowie Listbox
 hl_bib.grid(row=1, column=0, columnspan=3, padx=10, pady=15, sticky="s")
 bib_listbox.grid(row=2, column=0, columnspan=3,
                  padx=10, pady=10, sticky="ns")
 
-# Packing Lösch-Button
 delete_button.grid(row=3, column=0, columnspan=3,
                    padx=10, pady=10, sticky="ns")
 
